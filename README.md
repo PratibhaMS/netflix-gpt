@@ -8,6 +8,14 @@
 - sign up Form
 - Form Validation
 - useRef hook
+- firebase setup
+- deploying our app to production
+- create signup user Account
+- implement sign In user api
+- created Redux store with userslice
+- implemented sign out
+- updated profile
+- fetch moives from TMDB moives
 
 # Feature
 
