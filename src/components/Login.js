@@ -7,13 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BACKGROUND_LOGO, CONSTANT_PROFILE_PHOTO } from "../utils/constant";
 
 // rafce
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -45,14 +45,13 @@ const Login = () => {
           // console.log(user);
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: CONSTANT_PROFILE_PHOTO,
           })
             .then(() => {
               // Profile updated!
               // ...
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -75,9 +74,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
           // ...
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -90,12 +87,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className="bg-cover"
-          src="
-https://assets.nflxext.com/ffe/siteui/vlv3/fbf440b2-24a0-49f5-b2ba-a5cbe8ea8736/web/IN-en-20250324-TRIFECTA-perspective_d7c906ec-0531-47de-8ece-470d5061c88a_large.jpg"
-          alt="body_bg"
-        />
+        <img className="bg-cover" src={BACKGROUND_LOGO} alt="body_bg" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
